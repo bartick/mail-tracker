@@ -11,6 +11,7 @@ console.log("Gmail HTML Injector v1.3: Script loaded and running.");
 let TRACKER_BASE_URL = ""; 
 const SIGNATURE_ID = 'gmail-signature-tracker-block';
 const TRACKER_IMG_ID = 'gmail-tracker-pixel-image';
+let uuid = "";
 
 /**
  * Creates the full HTML for the signature and tracking pixel.
@@ -54,6 +55,7 @@ function injectOrUpdateTracker(composeEditor) {
   const params = new URLSearchParams();
   if (recipients) params.append('email', recipients);
   if (subject) params.append('subject', subject);
+  if (uuid) params.append('uuid', uuid);
   
   const trackingUrl = `${TRACKER_BASE_URL}?${params.toString()}`;
 
@@ -69,6 +71,7 @@ function injectOrUpdateTracker(composeEditor) {
     const isReplyOrForward = composeEditor.querySelector('blockquote.gmail_quote');
     if (!isReplyOrForward) {
       console.log('Injector: New email detected. Injecting signature with URL:', trackingUrl);
+      uuid = window.crypto.getRandomValues(new Uint8Array(16));
       const signatureHtml = createSignatureHtml(trackingUrl);
       composeEditor.insertAdjacentHTML('beforeend', signatureHtml);
     }
