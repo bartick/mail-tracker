@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Gmail HTML Injector",
+  "version": "1.2",
+  "description": "Injects a custom HTML block into the Gmail compose window.",
+  "permissions": [
+    "scripting",
+    "storage"
+  ],
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "mail.png"
+  }
+}
+
