@@ -76,6 +76,10 @@ db-migrate:
 db-reset: db-down db-up db-migrate
 	@echo "✅ Database reset complete."
 
+debug:
+	@echo "Starting debug build..."
+	@cargo run -- --database-url=$(DATABASE_URL)
+
 # A simple help target to explain how to use the Makefile.
 help:
 	@echo "Available commands:"
@@ -84,7 +88,8 @@ help:
 	@echo "  make db-migrate  - Runs all .sql files from the migrations directory."
 	@echo "  make db-reset    - Stops, starts, and migrates the database. Perfect for a clean slate."
 	@echo "  make help        - Shows this help message."
+	@echo "  make debug       - Builds and runs the application in debug mode."
 
 # --- Housekeeping ---
 # Declare targets that are not files to prevent conflicts.
-.PHONY: default help check-env db-up db-down db-migrate db-reset
+.PHONY: default help check-env db-up db-down db-migrate db-reset debug

@@ -5,7 +5,12 @@ edition = "2024"
 
 [dependencies]
 axum = "0.8.4"
+clap = { version = "4.5.46", features = ["derive", "env"] }
+dotenv = { version = "0.15.0", features = ["clap"] }
+dotenvy = { version = "0.15.7", features = ["clap"] }
+env_logger = "0.11.8"
 serde = { version = "1.0.219", features = ["derive"] }
+sqlx = { version = "0.8.6", features = ["runtime-tokio-native-tls", "postgres", "uuid", "time"] }
 tokio = { version = "1.47.1", features = ["full"] }
 tower = { version = "0.5.2", features = ["full"] }
 tower-http = { version = "0.6.6", features = ["fs", "trace", "cors"] }
